@@ -37,6 +37,7 @@ alt-4 = 'workspace 4'
 alt-5 = 'workspace 5'
 alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
 
 alt-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
 alt-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
@@ -45,6 +46,7 @@ alt-shift-4 = 'move-node-to-workspace --focus-follows-window 4'
 alt-shift-5 = 'move-node-to-workspace --focus-follows-window 5'
 alt-shift-6 = 'move-node-to-workspace --focus-follows-window 6'
 alt-shift-7 = 'move-node-to-workspace --focus-follows-window 7'
+alt-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
 
 alt-shift-semicolon = 'mode service'
 alt-shift-r = 'mode resize'
@@ -77,13 +79,10 @@ alt-shift-l = ['join-with right', 'mode main']
 if.app-id = 'com.todoist.mac.Todoist'
 run = "move-node-to-workspace 1"
 [[on-window-detected]]
-if.app-id = 'net.imput.helium'
+if.app-id = 'net.input.helium'
 run = "move-node-to-workspace 2"
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
-run = "move-node-to-workspace 2"
-[[on-window-detected]]
-if.app-id = 'us.zoom.xos'
 run = "move-node-to-workspace 2"
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
@@ -97,9 +96,6 @@ run = "move-node-to-workspace 5"
 [[on-window-detected]]
 if.app-id = 'com.cron.electron'
 run = "move-node-to-workspace 6"
-[[on-window-detected]]
-if.app-id = 'com.spotify.client'
-run = "move-node-to-workspace 7"
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
 run = "move-node-to-workspace 7"
