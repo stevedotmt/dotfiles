@@ -4,8 +4,8 @@
   "defaultModel": "gpt-5.5",
   "defaultThinkingLevel": "low",
   "theme": "mies-light",
+  "quietStartup": true,
   "packages": [
-    "npm:pi-web-access",
-    "npm:@weiping/pi-superpowers"
+    "npm:pi-web-access"
   ]
 }
