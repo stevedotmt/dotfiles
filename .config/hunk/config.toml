@@ -1,0 +1,53 @@
+theme = "custom"    # graphite, midnight, paper, ember, catppuccin-latte, catppuccin-mocha, custom
+mode = "stack"       # auto, split, stack
+vcs = "git"          # git, jj
+watch = false
+exclude_untracked = false
+line_numbers = false
+wrap_lines = false
+
+[custom_theme]
+base = "paper"
+label = "Mies Light"
+background = "#ffffff"
+panel = "#ffffff"
+panelAlt = "#c6c6c6"
+border = "#949494"
+accent = "#5f8787"
+accentMuted = "#767676"
+text = "#080808"
+muted = "#767676"
+addedBg = "#e6f3e6"
+removedBg = "#f8e1e1"
+contextBg = "#ffffff"
+addedContentBg = "#d4ead4"
+removedContentBg = "#f2cccc"
+contextContentBg = "#ffffff"
+addedSignColor = "#008700"
+removedSignColor = "#d70000"
+lineNumberBg = "#ffffff"
+lineNumberFg = "#767676"
+selectedHunk = "#b0b0b0"
+badgeAdded = "#e6f3e6"
+badgeRemoved = "#f8e1e1"
+badgeNeutral = "#767676"
+fileNew = "#00af5f"
+fileDeleted = "#d70000"
+fileRenamed = "#8e700b"
+fileModified = "#5f8787"
+fileUntracked = "#d7af00"
+noteBorder = "#5f8787"
+noteBackground = "#d0d0d0"
+noteTitleBackground = "#3e3d32"
+noteTitleText = "#ffffff"
+
+[custom_theme.syntax]
+default = "#080808"
+keyword = "#080808"
+string = "#080808"
+comment = "#767676"
+number = "#080808"
+function = "#080808"
+property = "#080808"
+type = "#080808"
+punctuation = "#080808"
