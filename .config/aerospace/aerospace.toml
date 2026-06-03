@@ -97,6 +97,12 @@ run = "move-node-to-workspace 4"
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = "move-node-to-workspace 5"
 [[on-window-detected]]
+if.app-id = 'org.whispersystems.signal-desktop'
+run = "move-node-to-workspace 5"
+[[on-window-detected]]
+if.app-id = 'net.whatsapp.WhatsApp'
+run = "move-node-to-workspace 5"
+[[on-window-detected]]
 if.app-id = 'com.cron.electron'
 run = "move-node-to-workspace 6"
 [[on-window-detected]]
