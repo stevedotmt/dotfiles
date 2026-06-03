@@ -3,7 +3,7 @@ import { execFile } from "node:child_process";
 
 const OP_ITEM = "op://Personal/opencode/api";
 const ENV_VARS = ["OPENCODE_API_KEY", "OPENCODE_ZEN_AUTH"] as const;
-const TIMEOUT_MS = 15_000;
+const TIMEOUT_MS = 120_000;
 
 function readOpSecret(): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -18,6 +18,16 @@ function readOpSecret(): Promise<string> {
       (error, stdout, stderr) => {
         if (error) {
           const message = stderr.trim() || error.message;
+          const killedByTimeout = "killed" in error && error.killed;
+          if (killedByTimeout) {
+            reject(
+              new Error(
+                `Timed out after ${TIMEOUT_MS}ms while waiting for 1Password.`,
+              ),
+            );
+            return;
+          }
+
           reject(new Error(message));
           return;
         }

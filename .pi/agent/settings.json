@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.76.0",
+  "lastChangelogVersion": "0.78.0",
   "defaultProvider": "opencode",
   "defaultModel": "gpt-5.5",
   "defaultThinkingLevel": "low",
