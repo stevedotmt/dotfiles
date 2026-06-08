@@ -38,7 +38,8 @@ set -gx PATH $PATH $GOPATH/bin
 set -gx PATH $PATH $HOME/.cargo/bin
 
 # Vim all the things
-set -gx VISUAL "vim"
+alias vim nvim
+set -gx VISUAL "nvim"
 set -gx EDITOR $VISUAL
 
 # Start tmux when not set
