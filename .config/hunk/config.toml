@@ -37,9 +37,9 @@ fileRenamed = "#8e700b"
 fileModified = "#5f8787"
 fileUntracked = "#d7af00"
 noteBorder = "#5f8787"
-noteBackground = "#d0d0d0"
-noteTitleBackground = "#3e3d32"
-noteTitleText = "#ffffff"
+noteBackground = "#c6c6c6"
+noteTitleBackground = "#c6c6c6"
+noteTitleText = "#080808"
 
 [custom_theme.syntax]
 default = "#080808"
