@@ -50,7 +50,7 @@
   separator = red bold
   linenumber = normal
 [core]
-  editor = vim
+  editor = nvim
   autocrlf = input
   pager = hunk pager
 [pull]
