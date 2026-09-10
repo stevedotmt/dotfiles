@@ -24,7 +24,7 @@ import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
 const SUBAGENT_CONFIG = join(homedir(), ".pi/agent/extensions/subagent/config.json");
 const DEFAULT_HOOK = join(homedir(), ".pi/agent/scripts/subagent-worktree-setup.mjs");
-const DEFAULT_BASE = join(homedir(), "code/.worktrees/pi-subagents");
+const DEFAULT_BASE = join(homedir(), "code/.worktrees");
 
 // git global flags that consume a separate argument before the subcommand
 const GIT_FLAGS_WITH_ARGS = new Set(["-C", "-c", "--git-dir", "--work-tree", "--namespace", "--exec-path"]);
@@ -124,6 +124,20 @@ function repoRootFor(cwd: string): string | undefined {
 }
 
 /**
+ * If the segment is a bare `cd <dir>`, return the new absolute cwd it would
+ * produce; otherwise undefined. `cd` with no args goes home; extra args fail
+ * open (left untouched).
+ */
+function parseBareCd(segment: string, cwd: string): string | undefined {
+	const tokens = tokenize(segment);
+	if (tokens.length === 0 || tokens[0].value !== "cd") return undefined;
+	if (tokens.length === 1) return homedir();
+	if (tokens.length !== 2) return undefined;
+	const target = expandHome(tokens[1].value);
+	return isAbsolute(target) ? target : resolve(cwd, target);
+}
+
+/**
  * Rewrite one command segment (text between &&, ||, ;, |).
  * Returns the rewritten segment, or undefined when nothing applies.
  */
@@ -196,7 +210,13 @@ function transformSegment(segment: string, cwd: string, cfg: WorktreeConfig): st
 	const leaf = basename(requestedPath);
 	if (!leaf || leaf === "." || leaf === "..") return undefined;
 
-	const repoRoot = repoRootFor(cDir ?? cwd);
+	// `git -C <dir>` may be relative; resolve it against the effective cwd
+	let repoDir = cwd;
+	if (cDir !== undefined) {
+		const expanded = expandHome(cDir);
+		repoDir = isAbsolute(expanded) ? expanded : resolve(cwd, expanded);
+	}
+	const repoRoot = repoRootFor(repoDir);
 	if (!repoRoot) return undefined;
 	const repoName = basename(repoRoot);
 	const targetParent = join(cfg.baseDir, repoName);
@@ -228,8 +248,16 @@ function transformSegment(segment: string, cwd: string, cfg: WorktreeConfig): st
 export function rewriteCommand(command: string, cwd: string, cfg: WorktreeConfig = loadConfig()): string {
 	// Split preserving separators so we can reassemble exactly
 	const parts = command.split(/(&&|\|\||[;|])/);
+	// Track the effective cwd across segments: a bare `cd <dir> &&` prefix
+	// changes which repo a later `git worktree add` operates on.
+	let effectiveCwd = cwd;
 	for (let k = 0; k < parts.length; k += 2) {
-		const rewritten = transformSegment(parts[k], cwd, cfg);
+		const cdTarget = parseBareCd(parts[k], effectiveCwd);
+		if (cdTarget !== undefined) {
+			effectiveCwd = cdTarget;
+			continue;
+		}
+		const rewritten = transformSegment(parts[k], effectiveCwd, cfg);
 		if (rewritten !== undefined) parts[k] = rewritten;
 	}
 	return parts.join("");
