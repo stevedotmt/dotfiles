@@ -63,7 +63,7 @@ alt-b = 'exec-and-forget if [ -d /Applications/Helium.app ]; then open -n /Appli
 alt-t = 'exec-and-forget open -n /Applications/Todoist.app'
 alt-m = 'exec-and-forget open -n /System/Applications/Mail.app'
 alt-n = 'exec-and-forget open -n /System/Applications/Notes.app'
-alt-a = 'exec-and-forget if [ -d /Applications/Cursor.app ]; then open -n /Applications/Cursor.app; elif [ -d /Applications/ChatGPT.app ]; then open -n /Applications/ChatGPT.app; else open -n "/Applications/Claude.app"; fi'
+alt-a = 'exec-and-forget if [ -d "/Applications/Grok Bot.app" ]; then open -n "/Applications/Grok Bot.app"; elif [ -d /Applications/Cursor.app ]; then open -n /Applications/Cursor.app; elif [ -d /Applications/ChatGPT.app ]; then open -n /Applications/ChatGPT.app; else open -n "/Applications/Claude.app"; fi'
 
 [mode.resize.binding]
 minus = 'resize smart -50'
@@ -102,6 +102,9 @@ if.app-id = 'com.openai.codex'
 run = "move-node-to-workspace 4"
 [[on-window-detected]]
 if.app-id = 'com.todesktop.230313mzl4w4u92'
+run = "move-node-to-workspace 4"
+[[on-window-detected]]
+if.app-id = 'com.anysphere.sand'
 run = "move-node-to-workspace 4"
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
