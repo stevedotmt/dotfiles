@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "0.84.3",
-  "defaultProvider": "fireworks",
-  "defaultModel": "accounts/fireworks/models/kimi-k3",
-  "defaultThinkingLevel": "max",
+  "lastChangelogVersion": "0.85.1",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-6-astra",
+  "defaultThinkingLevel": "high",
   "theme": "mies-light",
   "quietStartup": true,
   "packages": [

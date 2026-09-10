@@ -16,7 +16,7 @@ import { uuidv7 } from "@earendil-works/pi-ai";
 
 // Cheap models, in preference order; the first with configured auth is used.
 const CANDIDATES: Array<[provider: string, id: string]> = [
-	["fireworks", "deepseek-v4-flash-0731"],
+	["fireworks", "accounts/fireworks/models/glm-5p3-flash"],
 	["anthropic", "claude-haiku-4-5"],
 ];
 

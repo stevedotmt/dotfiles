@@ -2,7 +2,7 @@
  * Model Shortcuts
  *
  * Registers one slash command per entry in a JSON config file, for quick
- * model switching: /kimi, /fable, /sol, ...
+ * model switching: /kimi, /fable, /astra, ...
  *
  * Config files (merged, project-local takes precedence):
  * - ~/.pi/agent/model-shortcuts.json (global)
@@ -17,7 +17,7 @@
  * - "thinkingLevel" is optional. If omitted, the current thinking level is
  *   kept (pi clamps it to the model's capabilities).
  * - Any command also accepts an ad-hoc thinking level override, e.g.
- *   "/sol max" switches to the configured model with thinking set to max.
+ *   "/astra max" switches to the configured model with thinking set to max.
  *
  * To add/remove shortcuts: edit the JSON, then run /reload.
  */
