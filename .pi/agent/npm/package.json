@@ -2,10 +2,10 @@
   "name": "pi-extensions",
   "private": true,
   "dependencies": {
-    "@plannotator/pi-extension": "^0.27.13",
-    "pi-cursor-sdk": "^0.3.6",
-    "pi-mcp-adapter": "^2.32.1",
-    "pi-subagents": "^0.67.0",
-    "pi-web-access": "^0.28.0"
+    "@plannotator/pi-extension": "^0.27.16",
+    "pi-cursor-sdk": "^0.3.7",
+    "pi-mcp-adapter": "^2.34.0",
+    "pi-subagents": "^0.68.0",
+    "pi-web-access": "^0.29.0"
   }
 }
