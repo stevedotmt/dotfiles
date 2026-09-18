@@ -88,18 +88,17 @@ function t
 
     # Create new session with 3 windows
     tmux new-session -d -s "$name" -c "$dir"
+
+    # 1. Vim
     tmux send-keys -t "$name" "vim" Enter
 
-    tmux new-window -t "$name" -c "$dir"
-    if command -q pi
-        tmux send-keys -t "$name" "pi" Enter
-    else if command -q agent
-        tmux send-keys -t "$name" "agent" Enter
-    end
-
+    # 2. Shell
     tmux new-window -t "$name" -c "$dir"
 
-    tmux select-window -t "$name:1"
+    # 3. Agent
+    tmux new-window -t "$name" -c "$dir"
+    tmux send-keys -t "$name" "pi" Enter
+    tmux select-window -t "$name:3"
 
     # Attach / switch
     if set -q TMUX
