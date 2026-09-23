@@ -9,8 +9,7 @@
     "npm:pi-web-access",
     "npm:pi-mcp-adapter",
     "npm:pi-subagents",
-    "npm:@plannotator/pi-extension",
-    "npm:pi-cursor-sdk"
+    "npm:@plannotator/pi-extension"
   ],
   "editorPaddingX": 1,
   "outputPad": 1,
