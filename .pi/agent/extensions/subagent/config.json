@@ -1,10 +1,9 @@
 {
-	"artifactDir": "temp",
-	"fleetView": false,
-	"missions": {
-		"enabled": false
-	},
-	"worktreeBaseDir": "~/code/.worktrees",
-	"worktreeSetupHook": "~/.pi/agent/scripts/subagent-worktree-setup.mjs",
-	"worktreeSetupHookTimeoutMs": 45000
+  "artifactDir": "temp",
+  "missions": {
+    "enabled": false
+  },
+  "worktreeBaseDir": "~/code/.worktrees",
+  "worktreeSetupHook": "~/.pi/agent/scripts/subagent-worktree-setup.mjs",
+  "worktreeSetupHookTimeoutMs": 45000
 }
