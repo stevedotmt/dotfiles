@@ -29,6 +29,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 })
 
+-- Don't hard-wrap git commit messages at 72 chars
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "gitcommit",
+	callback = function()
+		vim.opt_local.textwidth = 0
+	end,
+})
+
 -- Decrease update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
