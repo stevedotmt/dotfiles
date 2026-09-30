@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.87.1",
+  "lastChangelogVersion": "0.99.1",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
@@ -7,7 +7,6 @@
   "quietStartup": true,
   "packages": [
     "npm:pi-web-access",
-    "npm:pi-mcp-adapter",
     "npm:pi-subagents",
     "npm:@plannotator/pi-extension"
   ],
