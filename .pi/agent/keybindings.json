@@ -4,5 +4,7 @@
   "app.model.cycleForward": [],
   "app.model.cycleBackward": [],
   "tui.input.newLine": ["shift+enter", "ctrl+j", "alt+enter"],
-  "app.message.followUp": ["ctrl+q"]
+  "app.message.followUp": ["ctrl+q"],
+  "tui.altScreen.lineUp": ["ctrl+shift+k"],
+  "tui.altScreen.lineDown": ["ctrl+shift+j"]
 }

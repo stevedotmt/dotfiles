@@ -1,21 +1,25 @@
 {
-  "lastChangelogVersion": "0.99.1",
+  "lastChangelogVersion": "1.0.0",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
-  "theme": "mies-light",
   "quietStartup": true,
+  "defaultTools": [
+    "+codemode"
+  ],
+  "extensions": [
+    "-builtin:codemode"
+  ],
   "packages": [
     "npm:pi-web-access",
     "npm:pi-subagents",
     "npm:@plannotator/pi-extension"
   ],
   "editorPaddingX": 1,
-  "outputPad": 1,
   "warnings": {
     "anthropicExtraUsage": false
   },
-  "tuiMode": "regular",
   "hideThinkingBlock": true,
-  "httpIdleTimeoutMs": 60000
+  "httpIdleTimeoutMs": 60000,
+  "deviceId": "e40f6392-41b0-42e5-9053-2a13d7f3b387"
 }
