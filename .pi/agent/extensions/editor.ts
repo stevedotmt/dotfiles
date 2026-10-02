@@ -1,7 +1,8 @@
 /**
  * Cursor-like editor: no ─ borders, pale bar, dark text.
  *
- * Tweak spacing / colors below, then /reload.
+ * Horizontal padding comes from the `editorPaddingX` setting.
+ * Tweak vertical spacing / colors below, then /reload.
  */
 
 import {
@@ -10,7 +11,6 @@ import {
 } from "@earendil-works/pi-coding-agent";
 import { visibleWidth } from "@earendil-works/pi-tui";
 
-const PADDING_X = 1; // columns inside the bar (left/right)
 const PADDING_Y = 1; // filled rows inside the bar (above/below text)
 const MARGIN_Y = 1; // unfilled rows outside the bar (above/below)
 
@@ -34,7 +34,6 @@ function times(n: number, line: string): string[] {
 
 class CursorLikeEditor extends CustomEditor {
 	render(width: number): string[] {
-		this.setPaddingX(PADDING_X);
 		const lines = super.render(width);
 		const bottom = lines.findLastIndex(isBorderLine);
 		if (bottom < 1) return lines;
