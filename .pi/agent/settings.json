@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.0.0",
+  "lastChangelogVersion": "1.0.2",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
@@ -12,8 +12,8 @@
   ],
   "packages": [
     "npm:pi-web-access",
-    "npm:pi-subagents",
-    "npm:@plannotator/pi-extension"
+    "npm:@plannotator/pi-extension",
+    "npm:pi-subagents"
   ],
   "editorPaddingX": 1,
   "warnings": {
