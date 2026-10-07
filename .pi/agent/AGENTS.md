@@ -6,16 +6,20 @@
 
 # Comments
 
-Never write code comments, except:
+Default: no comments. If code needs explaining, rename, extract, or retype it instead.
+
+Allowed only:
 
 - legal/license headers
-- doc comments on public API contracts
-- behavior forced by an external dependency, platform, vendor, or protocol we cannot reshape
-- issue/RFC links for constraints code cannot express
-- lint/format suppressions ("// prettier-ignore", "// biome-ignore format:"), only when the rule is faulty, pedantic, or style-only
+- doc comments on public API contracts, exported Go identifiers, and CRD/API type fields (they generate docs and CRD schemas)
+- behavior forced by an external dependency, platform, vendor, or protocol we can't reshape
+- issue/RFC links for constraints code can't express
+- machine-read directives: `//go:build`, `//go:generate`, `//go:embed`, `// +kubebuilder:`, `// +k8s:`
+- suppressions (`// prettier-ignore`, `// biome-ignore`, `//nolint:<linter> // <reason>`) only for faulty, pedantic, or style-only rules
 
-Never add lint or type suppressions ("@ts-ignore", "@ts-expect-error", "eslint-disable") that hide real correctness or safety checks; fix the code they flag, or restructure it.
-Never write narration ("// parse the input"), section banners, commented-out code, or workaround justifications ("// IMPORTANT: ...", "hack", "for now").
-If code needs a comment to be understood, rename or restructure the code instead.
-Never remove or weaken an existing comment's constraint without encoding the constraint in a type, runtime check, test, or lint first.
-Applies to transient states too: don't document or comment them.
+Never:
+
+- narration (`// parse the input`), section banners, commented-out code, transient states, or workaround justifications (`// IMPORTANT:`, `hack`, `for now`)
+- suppressions hiding correctness or safety checks (`@ts-ignore`, `@ts-expect-error`, `eslint-disable`, `//nolint`, `# type: ignore`); fix or restructure the flagged code
+
+Existing comments: don't delete them outside the lines you change. Before removing or weakening a constraint that still holds, encode it in a type, runtime check, test, or lint.
