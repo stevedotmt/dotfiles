@@ -1,3 +1,5 @@
+status is-interactive; or status is-login; or return
+
 # Flox default environment
 if type -q flox
   flox activate -d $HOME -m run | source
