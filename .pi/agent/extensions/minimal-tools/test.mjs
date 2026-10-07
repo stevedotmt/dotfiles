@@ -214,6 +214,37 @@ test("file tools return native results in two working directories", async (t) =>
 	}
 });
 
+test("Codemode scripts receive read's image block through the wrapped definition", async (t) => {
+	const f = await fixture(t);
+	const pixel = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==";
+	await writeFile(join(f.cwd, "pixel.png"), Buffer.from(pixel, "base64"));
+	const read = f.tool("read");
+	const args = { path: "pixel.png" };
+	const direct = await read.execute("fixture", args, undefined, undefined, toolContext(f.cwd));
+	const native = await factories.read(f.cwd, pi.SettingsManager.inMemory()).execute("fixture", args, undefined, undefined, toolContext(f.cwd));
+	assert.deepEqual(direct, native);
+	assert.ok(read.outputSchema, "read keeps outputSchema");
+	assert.equal(direct.structuredContent?.type, "image");
+
+	const ctx = {
+		...nestedContext(f),
+		tools: [read],
+		executeTool: async (name, nestedArgs, options) => ({
+			toolCall: { id: "fixture/1" }, isError: false,
+			result: await read.execute("fixture/1", nestedArgs, options.signal, undefined, toolContext(f.cwd)),
+		}),
+	};
+	const result = await executeScript(f, 'const r = await tools.read({ path: "pixel.png" }); text(JSON.stringify({ type: r.type, mimeType: r.mimeType, note: r.note })); image(r);', ctx);
+	assert.ok(!result.isError, textOf(result));
+	const { type, data, mimeType, note } = direct.structuredContent;
+	assert.ok(textOf(result).includes(JSON.stringify({ type, mimeType, note })), textOf(result));
+	const images = result.content.filter((item) => item.type === "image");
+	assert.deepEqual(images.map((item) => ({ data: item.data, mimeType: item.mimeType })), [{ data, mimeType }]);
+	const saved = textOf(result).match(/Image saved to (\S+)/)?.[1];
+	assert.ok(saved, "image() names its temp file");
+	await rm(saved, { force: true });
+});
+
 test("collapsed truncation keeps the row background", async (t) => {
 	const f = await fixture(t);
 	const compact = row(f.tool("bash"), { command: `echo ${"a".repeat(200)}` }, f.cwd);
