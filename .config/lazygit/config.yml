@@ -1,7 +1,5 @@
 disableStartupPopups: false
 gui:
-  authorColors:
-    "*": "default"
   skipRewordInEditorWarning: true
   # Config relating to colors and styles.
   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#color-attributes
@@ -17,6 +15,8 @@ gui:
       - blue
     selectedLineBgColor:
       - white
+    authorColors:
+      "*": "default"
   skipDiscardChangeWarning: true
 git:
   autoFetch: false
