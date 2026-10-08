@@ -1,3 +1,4 @@
 disable_metrics = true
 set_prompt = false
 disable_hook = true
+auth_notifications = false
