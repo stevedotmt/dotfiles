@@ -1,8 +1,6 @@
-status is-interactive; or status is-login; or return
-
 # Flox default environment
 if type -q flox
-  flox activate -d $HOME -m run | source
+    flox activate -d $HOME -m run | source
 end
 
 set -gx PATH /opt/homebrew/bin $PATH
@@ -28,8 +26,15 @@ set -gx PATH $PATH $HOME/.cargo/bin
 
 # Vim all the things
 alias vim nvim
-set -gx VISUAL "nvim"
+set -gx VISUAL nvim
 set -gx EDITOR $VISUAL
+
+if status is-interactive
+    and not set -q TMUX
+    and not set -q VSCODE_RESOLVING_ENVIRONMENT # Cursor/VS Code spawn interactive login fish (no TTY) to capture env.
+    and isatty stdin
+    exec tmux new-session
+end
 
 # Set locale
 set -gx LC_ALL en_US.UTF-8
