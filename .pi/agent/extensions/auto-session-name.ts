@@ -16,9 +16,10 @@ import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-a
 import { uuidv7 } from "@earendil-works/pi-ai";
 
 // Cheap models in preference order; the first with configured auth that
-// answers is used. Both reliably keep a still-accurate title and replace a
+// answers is used. All reliably keep a still-accurate title and replace a
 // stale one; faster models such as Nemotron Lightning did not.
 const CANDIDATES: Array<[provider: string, id: string]> = [
+	["anthropic", "claude-haiku-5-5"],
 	["fireworks", "accounts/fireworks/models/deepseek-v4p1-flash"],
 	["anthropic", "claude-haiku-4-5"],
 ];
@@ -69,11 +70,12 @@ function messageText(message: unknown): string {
 	return "";
 }
 
+// Haiku 5.5 sometimes reasons aloud before the title on injection-like input;
+// the title is then the last line.
 function sanitizeName(raw: string): string {
-	const name = raw
-		.trim()
-		.split("\n")[0]
-		.replace(/^title:\s*/i, "")
+	const lines = raw.split("\n").map((l) => l.trim()).filter(Boolean);
+	const name = (lines.at(-1) ?? "")
+		.replace(/^(?:[\w ]{0,20} )?title:\s*/i, "")
 		.replace(/^["'`#*\s]+|["'`#*\s.!?:;]+$/g, "")
 		.slice(0, MAX_NAME_LENGTH)
 		.trim();
