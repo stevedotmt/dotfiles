@@ -29,6 +29,18 @@ async function packageRoot(start) {
 	}
 }
 
+async function managedRelease(installRoot) {
+	try {
+		const version = (await readFile(join(installRoot, "current-version"), "utf8")).trim();
+		const dir = join(installRoot, "releases", version, "node_modules", "@earendil-works", "pi-coding-agent");
+		await access(join(dir, "package.json"));
+		return dir;
+	} catch (error) {
+		if (error.code !== "ENOENT" && error.code !== "ENOTDIR") throw error;
+		return undefined;
+	}
+}
+
 async function findPi() {
 	if (process.argv[2]) {
 		const dir = resolve(process.argv[2]);
@@ -43,11 +55,16 @@ async function findPi() {
 	} catch (error) {
 		if (error.code !== "MODULE_NOT_FOUND") throw error;
 	}
+	if (process.env.PI_MANAGED_INSTALL_ROOT) {
+		const root = await managedRelease(process.env.PI_MANAGED_INSTALL_ROOT);
+		if (root) return root;
+	}
 	for (const directory of (process.env.PATH ?? "").split(delimiter)) {
 		const executable = join(directory, "pi");
 		try {
 			await access(executable, constants.X_OK);
-			const root = await packageRoot(await realpath(executable));
+			const resolved = await realpath(executable);
+			const root = await packageRoot(resolved) ?? await managedRelease(join(dirname(dirname(resolved)), "install"));
 			if (root) return root;
 		} catch (error) {
 			if (!["ENOENT", "ENOTDIR", "EACCES"].includes(error.code)) throw error;
@@ -95,7 +112,7 @@ async function fixture(t, settings = {}) {
 	const runtime = loaded.runtime;
 	runtime.getSettings = () => currentSettings;
 	runtime.appendEntry = (customType, data) => entries.push({ type: "custom", customType, data });
-	const namespace = { name: "mcp__test", description: "Fixture tools", instructions: "Read-only fixture" };
+	const namespace = { name: "mcp__test", aliases: ["test"], description: "Fixture tools", instructions: "Read-only fixture" };
 	runtime.getAllTools = () => [{ name: "probe", namespace }];
 	const native = await loadExtensionFromFactory(pi.createCodemodeExtension(), cwd, createEventBus(), runtime);
 	const start = async () => {
@@ -302,6 +319,8 @@ test("Codemode collapsed/streaming views are compact and expansion is native", a
 	assert.doesNotMatch(strip(compact.render(80)), /SUCCESS OUTPUT/);
 	compact.updateResult({ content: [], details: { calls: [{ ...successful.details.calls[0], status: "running" }] }, isError: false }, true);
 	assert.doesNotMatch(strip(compact.render(80)), /probe/);
+	compact.updateResult(result);
+	assert.doesNotMatch(strip(compact.render(80)), /SUCCESS OUTPUT|probe/);
 });
 
 test("caught failures, cancellations, and script errors stay visible without changing results", async (t) => {
@@ -375,6 +394,7 @@ test("loadout/context declarations match native Codemode in both modes", async (
 		declared: [tool, ...callable], callable, registered: [tool, ...callable],
 		getExposure: (name) => name === "codemode" ? "model-only" : "direct",
 		getNamespace: () => undefined,
+		getPromptGuidelines: (name) => name === "probe" ? ["Fixture guideline"] : [],
 	};
 	for (const mode of ["on", "only"]) {
 		f.setSettings({ codemode: { mode, inlineBudget: 0 } });
