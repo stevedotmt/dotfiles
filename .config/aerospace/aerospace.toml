@@ -84,6 +84,9 @@ alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
 if.app-id = 'com.todoist.mac.Todoist'
+run = "move-node-to-workspace 10"
+[[on-window-detected]]
+if.app-id = 'com.linear'
 run = "move-node-to-workspace 1"
 [[on-window-detected]]
 if.app-id = 'net.imput.helium'
