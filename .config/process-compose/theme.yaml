@@ -1,0 +1,56 @@
+# Mies Light for process-compose — colors from https://github.com/jaredgorski/Mies.vim
+# Palette matches ~/.config/ghostty/config; roles follow pi's light theme
+# (accent, muted, border, success/warning/error).
+#
+#   chicagoBlack1 #080808  text
+#   chicagoGray1  #3E3D32  StatusLine bg
+#   chicagoGray3  #767676  muted (Comment)
+#   chicagoGray4  #949494  dim
+#   chicagoGray5  #B0B0B0  border (Visual)
+#   chicagoGray6  #C6C6C6  Pmenu
+#   chicagoWhite1 #D0D0D0  CursorLine
+#   chicagoWhite2 #FFFFFF  background
+#   chicagoBlue   #5F8787  accent
+#   chicagoGreen1 #008700  success
+#   chicagoGold1  #8E700B  warning
+#   chicagoRed    #D70000  error
+#
+# process-compose renames this theme to "Custom Style".
+style:
+  name: Mies Light
+  body:
+    fgColor: '#080808'
+    bgColor: '#FFFFFF'
+    secondaryTextColor: '#5F8787'
+    tertiaryTextColor: '#8E700B'
+    borderColor: '#B0B0B0'
+  stat_table:
+    keyFgColor: '#767676'
+    valueFgColor: '#080808'
+    bgColor: '#FFFFFF'
+    logoColor: '#5F8787'
+  proc_table:
+    fgColor: '#080808'
+    fgWarning: '#8E700B'
+    fgPending: '#949494'
+    fgCompleted: '#008700'
+    fgError: '#D70000'
+    bgColor: '#FFFFFF'
+    headerFgColor: '#5F8787'
+  help:
+    fgColor: '#080808'
+    keyColor: '#5F8787'
+    hlColor: '#FFFFFF'
+    categoryFgColor: '#8E700B'
+  dialog:
+    fgColor: '#080808'
+    bgColor: '#FFFFFF'
+    contrastBgColor: '#D0D0D0'
+    attentionBgColor: '#D70000'
+    buttonFgColor: '#080808'
+    buttonBgColor: '#C6C6C6'
+    buttonFocusFgColor: '#FFFFFF'
+    buttonFocusBgColor: '#3E3D32'
+    labelFgColor: '#5F8787'
+    fieldFgColor: '#080808'
+    fieldBgColor: '#D0D0D0'
