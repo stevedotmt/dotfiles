@@ -52,7 +52,6 @@
 [core]
   editor = nvim
   autocrlf = input
-  pager = hunk pager
 [pull]
   rebase = true
 [push]
