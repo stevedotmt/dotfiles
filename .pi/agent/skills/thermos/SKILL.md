@@ -17,24 +17,25 @@ Run the two thermo review passes as parallel subagents via the pi-subagents exte
    - `### Git / diff output`: `git log --oneline $BASE..HEAD`, `git diff --stat $BASE..HEAD`, and `git diff $BASE..HEAD`.
    - `### Changed file contents`: full contents of each changed file (skip deleted files; generated/vendored files may be listed by path only).
 
-   Build it with shell redirection rather than reading the files into your own context. Never inline the diff in the workflow script: backticks and `${` in the diff break the template literal, and `args` is capped at 16 KiB.
-5. Launch both subagents in parallel with a single `subagent` tool call (background is the default). Both reviewers get the same short task naming the context file:
+   Build it with shell redirection rather than reading the files into your own context. Never pass the diff through `args`: it is capped at 16 KiB.
+5. Launch both subagents in parallel with a single `subagent` tool call (background is the default) running the bundled script file `~/.pi/agent/skills/thermos/review.js`. Do not write a ```` ```js workflow ```` block or use `workflow: true`, and do not use the removed `workflowScript` parameter. Pass the absolute path (expand `~`) and fill `args`:
 
    ```js
-   subagent({ workflowScript: `
-     const task = [
-       "Review branch <branch> in <repo path>: HEAD <HEAD sha> against merge-base <BASE sha> (<base ref>).",
-       "Intent: <one or two sentences on what the branch is meant to do>.",
-       "Read the complete context file <context path> (### Git / diff output and ### Changed file contents), in chunks as needed.",
-       "Return prioritized findings with exact file:line references and evidence."
-     ].join(" ");
-     const results = await runs.all([
-       { key: "audit", agent: "thermo-nuclear-review-subagent", task },
-       { key: "quality", agent: "thermo-nuclear-code-quality-review-subagent", task }
-     ]);
-     return results.map(r => ({ agent: r.agent, ok: r.ok, error: r.error, output: r.output }));
-   ` })
+   subagent({
+     workflow: "/Users/steve/.pi/agent/skills/thermos/review.js",
+     args: {
+       repo: "<repo path>",
+       branch: "<branch>",
+       head: "<HEAD sha>",
+       base: "<BASE sha>",
+       baseRef: "<base ref>",
+       intent: "<one or two sentences on what the branch is meant to do>",
+       context: "<context path>"
+     }
+   })
    ```
+
+   The script gives both reviewers the same short task naming the context file and returns `{ agent, ok, error, output }` per reviewer.
 
    - `thermo-nuclear-review-subagent`: bugs, breakages, security, devex regressions, feature-flag leaks, and other branch-audit risks.
    - `thermo-nuclear-code-quality-review-subagent`: maintainability, structure, file-size growth, spaghetti, abstractions, and codebase-health risks.
