@@ -1,15 +1,10 @@
 {
-  "lastChangelogVersion": "1.3.0",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
   "quietStartup": true,
-  "defaultTools": [
-    "+codemode"
-  ],
-  "extensions": [
-    "-builtin:codemode"
-  ],
+  "defaultTools": ["+codemode"],
+  "extensions": ["-builtin:codemode"],
   "packages": [
     "npm:pi-web-access",
     "npm:@plannotator/pi-extension",
