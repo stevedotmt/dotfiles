@@ -2,8 +2,8 @@
   "name": "pi-extensions",
   "private": true,
   "dependencies": {
-    "@plannotator/pi-extension": "^0.28.33",
-    "pi-subagents": "^0.83.0",
-    "pi-web-access": "^0.45.0"
+    "@plannotator/pi-extension": "^0.28.36",
+    "pi-subagents": "^0.84.0",
+    "pi-web-access": "^0.46.0"
   }
 }
