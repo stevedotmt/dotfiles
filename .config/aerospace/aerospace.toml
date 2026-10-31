@@ -58,7 +58,7 @@ alt-shift-semicolon = 'mode service'
 alt-shift-r = 'mode resize'
 
 # Shortcuts to open applications
-alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
+alt-enter = 'exec-and-forget open -a "/Applications/Rex Beta.app"'
 alt-b = 'exec-and-forget if [ -d /Applications/Helium.app ]; then open -n /Applications/Helium.app; else open -n "/Applications/Google Chrome.app"; fi'
 alt-t = 'exec-and-forget open -n /Applications/Todoist.app'
 alt-m = 'exec-and-forget open -n /System/Applications/Mail.app'
@@ -95,7 +95,7 @@ run = "move-node-to-workspace 2"
 if.app-id = 'com.google.Chrome'
 run = "move-node-to-workspace 2"
 [[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
+if.app-id = 'com.superlogical.rex'
 run = "move-node-to-workspace 3"
 [[on-window-detected]]
 if.app-id = 'com.anthropic.claudefordesktop'
