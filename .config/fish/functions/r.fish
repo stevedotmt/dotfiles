@@ -61,7 +61,7 @@ function r
     set -l target (rex ls --json | jq -r --arg n "$name" '.sessions[] | select(.label == $n) | .session_id' | head -n 1)
 
     if test -z "$target"
-        set -l created (rex new "$name" -c "$dir" --window vim --json)
+        set -l created (rex new "$name" -c "$dir" --json)
         or return 1
         set target (printf '%s' "$created" | jq -er '.session_id')
         or return 1
@@ -70,9 +70,9 @@ function r
         rex send -s "$target" -b "$vim_block" vim
         rex send-key -s "$target" -b "$vim_block" enter
 
-        rex window new -s "$target" shell -c "$dir" --focus=false >/dev/null
+        rex window new -s "$target" -c "$dir" --focus=false >/dev/null
 
-        set -l agent (rex window new -s "$target" agent -c "$dir" --json)
+        set -l agent (rex window new -s "$target" -c "$dir" --json)
         set -l agent_block (printf '%s' "$agent" | jq -er '.block_ids[0]')
         rex send -s "$target" -b "$agent_block" pi
         rex send-key -s "$target" -b "$agent_block" enter
