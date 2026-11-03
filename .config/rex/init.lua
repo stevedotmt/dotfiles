@@ -23,6 +23,14 @@ local function window_of(block_id)
   return nil
 end
 
+local function session_root_dir()
+  local view, err = rex.session.view{}
+  if err ~= nil or view.windows[1] == nil then return nil end
+  local layer = view.windows[1].layers[1]
+  if layer == nil or layer.blocks[1] == nil then return nil end
+  return focused_dir(layer.blocks[1].block_id)
+end
+
 rex.action{
   name = "new_pi_tab",
   title = "New pi Tab",
@@ -32,7 +40,7 @@ rex.action{
       focus = true,
       layout = rex.layout.block{
         flavor = "com.superlogical.terminal.shell",
-        options = { command = { "pi" }, cwd = focused_dir(ctx.block_id) },
+        options = { command = { "pi" }, cwd = session_root_dir() or focused_dir(ctx.block_id) },
       },
     }
     if err ~= nil then error(err, 0) end
