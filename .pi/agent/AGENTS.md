@@ -23,3 +23,9 @@ Never:
 - suppressions hiding correctness or safety checks (`@ts-ignore`, `@ts-expect-error`, `eslint-disable`, `//nolint`, `# type: ignore`); fix or restructure the flagged code
 
 Existing comments: don't delete them outside the lines you change. Before removing or weakening a constraint that still holds, encode it in a type, runtime check, test, or lint.
+
+# Shell
+
+- My interactive shell is fish (v4). Any command I'm meant to copy and run myself must be fish syntax: `set -x VAR val`, `for x in a b c; ...; end`, `(cmd)` substitution, `; and` / `; or` or `&&` / `||`, `$status`. No heredocs, `[[ ]]`, `export VAR=...` one-liners in loops, or bash arrays.
+- Tool calls stay in bash; don't use fish syntax in the Bash tool.
+- Scripts committed to repos stay bash (per repo rules); only ad-hoc, hand-off commands are fish.
