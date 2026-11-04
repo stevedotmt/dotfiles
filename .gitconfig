@@ -52,6 +52,7 @@
 [core]
   editor = nvim
   autocrlf = input
+  pager = delta
 [pull]
   rebase = true
 [push]
@@ -83,3 +84,34 @@
   path = ~/.gitconfig-mbp
 [rebase]
   updateRefs = true
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  light = true
+  syntax-theme = Mies Light
+  minus-style = syntax "#F8E6E6"
+  minus-non-emph-style = syntax "#F8E6E6"
+  minus-emph-style = syntax "#F2CCCC"
+  minus-empty-line-marker-style = normal "#F8E6E6"
+  plus-style = syntax "#E6F2E6"
+  plus-non-emph-style = syntax "#E6F2E6"
+  plus-emph-style = syntax "#D4EAD4"
+  plus-empty-line-marker-style = normal "#E6F2E6"
+  file-style = "#080808" bold
+  file-decoration-style = "#949494" ul
+  hunk-header-style = file line-number syntax
+  hunk-header-decoration-style = "#C6C6C6" box
+  hunk-header-file-style = "#5F8787"
+  hunk-header-line-number-style = "#767676"
+  line-numbers-minus-style = "#D70000"
+  line-numbers-plus-style = "#008700"
+  line-numbers-zero-style = "#767676"
+  line-numbers-left-style = "#C6C6C6"
+  line-numbers-right-style = "#C6C6C6"
+  commit-style = "#5F8787"
+  commit-decoration-style = "#C6C6C6" box
+  blame-palette = "#FFFFFF" "#F2F2F2" "#E4E4E4"
+  whitespace-error-style = "#D70000" reverse
+[merge]
+    conflictStyle = zdiff3

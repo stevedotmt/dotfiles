@@ -20,6 +20,11 @@ gui:
   skipDiscardChangeWarning: true
 git:
   autoFetch: false
+  diffRenderers:
+    - type: stdinFilter
+      colorArg: always
+      command: delta --paging=never
+    - type: rawGit
 keybinding:
   files:
     commitChanges: C
