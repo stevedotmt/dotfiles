@@ -100,7 +100,7 @@
   plus-empty-line-marker-style = normal "#E6F2E6"
   file-style = "#080808" bold
   file-decoration-style = "#949494" ul
-  hunk-header-style = file line-number syntax
+  hunk-header-style = line-number syntax
   hunk-header-decoration-style = "#C6C6C6" box
   hunk-header-file-style = "#5F8787"
   hunk-header-line-number-style = "#767676"
