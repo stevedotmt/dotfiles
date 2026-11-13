@@ -3,12 +3,8 @@
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
   "quietStartup": true,
-  "defaultTools": [
-    "+codemode"
-  ],
-  "extensions": [
-    "-builtin:codemode"
-  ],
+  "defaultTools": ["+codemode"],
+  "extensions": ["-builtin:codemode"],
   "packages": [
     "npm:pi-web-access",
     "npm:@plannotator/pi-extension",
@@ -24,6 +20,6 @@
   "lastChangelogVersion": "1.5.2",
   "extensionChangelogVersions": {
     "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0",
-    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.87.0"
+    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.88.0"
   }
 }
