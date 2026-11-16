@@ -78,8 +78,12 @@ function r
         rex send-key -s "$target" -b "$agent_block" enter
     end
 
+    set -l client_flag
+    set -l app_client (rex client ls --json | jq -r '[.clients[] | select(.info.kind == "app")] | sort_by(.connected_at) | last | .client_id // empty')
+    test -n "$app_client"; and set client_flag -C "$app_client"
+
     set -l previous $REX_SESSION
-    rex do session.select session_id="$target"
+    rex $client_flag do session.select session_id="$target"
     or return 1
 
     if test "$kill_previous" = yes; and test -n "$previous"; and test "$previous" != "$target"
