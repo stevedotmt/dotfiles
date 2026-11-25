@@ -22,10 +22,10 @@
   "hideThinkingBlock": true,
   "httpIdleTimeoutMs": 60000,
   "deviceId": "e40f6392-41b0-42e5-9053-2a13d7f3b387",
-  "lastChangelogVersion": "1.5.2",
+  "lastChangelogVersion": "1.6.0",
   "extensionChangelogVersions": {
     "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.48.0",
-    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.89.1"
+    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.89.2"
   },
   "npmCommand": [
     "/Users/steve/.pi/agent/scripts/npm-min-release-age"
